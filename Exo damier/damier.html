@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<title>XML Schéma</title>
+	<link rel="stylesheet" type="text/css" href="new1.css">
+</head>
+<body>
+
+	<form id="InputValue">
+		<div>
+			<label for="NombreCase">Nombre de case par coté : </label>
+			<input type="number" id="NombreCase" name="nombrecase" value="8">
+		</div>
+		<div>
+			<label for="Couleur1">Première couleur du damier : </label>
+			<input type="color" id="Couleur1" name="couleur1" value="#ffffff">
+		</div>
+		<div>
+			<label for="Couleur2">Secondx couleur du damier : </label>
+			<input type="color" id="Couleur2" name="couleur2" value="#000000">
+		</div>
+		<div>
+			<input type="button" id="BoutonGener" name="But1" onclick ="ShowCanvas()" value="Afficher" ></button>
+		</div>
+	</form>
+	
+	<canvas id="DamierAffichage" width="900" height="900" style="border:1px solid #000000;">
+
+		<script>
+		
+			function ShowCanvas() {
+			
+			var canvas = document.getElementById("DamierAffichage");
+			var CaseMax = document.getElementById("NombreCase").value;
+			let Color1 = document.getElementById("Couleur1").value;
+			let Color2 = document.getElementById("Couleur2").value;
+			console.log(canvas);
+			var ctx = canvas.getContext("2d");
+			
+		<!-- dimension cube -->
+			var H = canvas.height;
+			var L = canvas.width;
+			var TailleCase = (canvas.height / CaseMax)*2;
+			var i = 0;
+			var j = 0;
+			
+			for (i = 0; i < H; i+=TailleCase) {
+				for (j = 0; j < L; j+=TailleCase) {
+				
+					ctx.fillStyle = Color1;
+					ctx.fillRect(i, j, i + (TailleCase/2), j+ (TailleCase/2));
+					ctx.fillStyle = Color2;
+					ctx.fillRect(i+(TailleCase/2), j, i+TailleCase, j+(TailleCase/2));
+					ctx.fillStyle = Color2;
+					ctx.fillRect(i, j+(TailleCase/2), i+(TailleCase/2), j+TailleCase);
+					ctx.fillStyle = Color1;
+					ctx.fillRect(i+(TailleCase/2), j+(TailleCase/2), i+TailleCase, j+TailleCase);
+				
+				}
+			}
+			}
+
+		</script>
+
+	</canvas>
+
+</body>
+</html>
